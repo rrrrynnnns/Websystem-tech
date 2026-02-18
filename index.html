@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #fff;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #dbeafe;
+            --primary-dark: #1e40af;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            border-bottom: 1px solid #e0e0e0;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            height: 50px;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            align-items: center;
+        }
+
+        nav li {
+            display: flex;
+            border-right: 1px solid #e0e0e0;
+            padding: 0 1.5rem;
+        }
+
+        nav li:last-child {
+            border-right: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 0;
+        }
+
+        nav a:not(.logo)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover:not(.logo)::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%);
+            border-bottom: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            padding: 4rem 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+            letter-spacing: -0.3px;
+        }
+
+        section#about > p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            line-height: 1.9;
+            margin-top: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            border-left: 5px solid transparent;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            border-left-color: var(--primary);
+            box-shadow: 0 12px 28px rgba(59, 130, 246, 0.15);
+            transform: translateY(-8px);
+            background: #fff;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .card-button {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .card-button:hover {
+            color: var(--primary-dark);
+            transform: translateX(5px);
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%);
+            border-top: none;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .contact-section > p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            font-size: 1rem;
+        }
+
+        .contact-links a:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 5%;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 0.9rem;
+            background: #fafafa;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1rem 5%;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            nav ul {
+                flex-direction: row;
+                gap: 0;
+                text-align: center;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav li {
+                justify-content: center;
+                border-right: 1px solid #e0e0e0;
+                padding: 0.5rem 1rem;
+            }
+
+            nav li:last-child {
+                border-right: none;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-links a {
+                width: 100%;
+            }
+
+            section {
+                padding: 2.5rem 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home" class="logo">Portfolio</a>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Hello, I'm Harry Banas</h1>
+        <p>Creating clean and simple web experiences</p>
+        <a href="#work" class="cta-button">View My Work</a>
+    </div>
+</section>
+
+<section id="about">
+    <h2>About</h2>
+    <p>I'm Harry Banas, a developer focused on building straightforward, functional websites. I work with modern web technologies and believe in simplicity and clean code.</p>
+</section>
+
+<section id="work">
+    <h2>Projects</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Project One</h3>
+            <p>A clean web application built with HTML, CSS, and JavaScript.</p>
+            <a href="#" class="card-button">View Project →</a>
+        </div>
+        <div class="card">
+            <h3>Project Two</h3>
+            <p>A responsive website designed for mobile and desktop users.</p>
+            <a href="#" class="card-button">View Project →</a>
+        </div>
+        <div class="card">
+            <h3>Project Three</h3>
+            <p>A simple tool that solves a real-world problem efficiently.</p>
+            <a href="#" class="card-button">View Project →</a>
+        </div>
+    </div>
+</section>
+
+<section class="contact-section" id="contact">
+    <h2>Get in Touch</h2>
+    <p>Let's work together</p>
+    <div class="contact-links">
+        <a href="mailto:hello@example.com">Email</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Harry Banas. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
